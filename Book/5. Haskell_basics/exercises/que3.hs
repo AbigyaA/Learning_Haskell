@@ -1,5 +1,4 @@
--- maxValue :: (Ord a) => [a] -> a 
-maxValue :: [Int] -> Int 
+maxValue :: (Ord a) => [a] -> a 
 
 maxValue (x:y:[]) | x < y = y
                   | x >= y = x 
