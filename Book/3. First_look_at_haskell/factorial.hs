@@ -18,9 +18,9 @@ fact4 n
     | n == 0 = 1
     | n >=1 = n * fact4 (n-1)
 
-fact5 :: Int -> Int
-fact5 0 = 1
-fact5 (n+1) = (n+1) * fact5 n
+-- fact5 :: Int -> Int
+-- fact5 0 = 1
+-- fact5 (n+1) = (n+1) * fact5 n
 
 fact6 :: Int -> Int
 fact6 n = product [1..n]

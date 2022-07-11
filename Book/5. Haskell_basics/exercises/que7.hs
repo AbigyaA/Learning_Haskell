@@ -10,4 +10,5 @@ natToBase b n | ((b >= 2) && (n > 1)) = ((natToBase b (n `div` b) ++ [(n `rem` b
 
 -- c
 baseToNat :: Int -> [Int] -> Int
--- baseToNat b xs 
+baseToNat b [] = 0
+baseToNat b (x:xs) | (b >= 2) = (x * (b^(length xs))) + baseToNat b xs
