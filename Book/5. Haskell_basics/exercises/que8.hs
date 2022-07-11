@@ -24,15 +24,15 @@ merge (x:[]) (y:[]) | (x < y) = [x,y]
 merge [] (y:[]) = [y]
 merge (x:[]) [] = [x]
 
-merge (x:x1:xs) (y:y1:ys) | ((x < x1) && (y < x) && (y /= y1)) = [y] ++ merge (x:x1:xs) (y1:ys)
-                          | ((x < x1) && (y > x) && (y /= y1)) = [x] ++ merge (x1:xs) (y:y1:ys)
-                          | ((x < x1) && (y == x) && (y /= y1)) = [x] ++ merge (x1:xs) (y1:ys)
+merge (x:x1:xs) (y:y1:ys) | ((x < x1) && (y < x) && (y < y1)) = [y] ++ merge (x:x1:xs) (y1:ys)
+                          | ((x < x1) && (y > x) && (y < y1)) = [x] ++ merge (x1:xs) (y:y1:ys)
+                          | ((x < x1) && (y == x) && (y < y1)) = [x] ++ merge (x1:xs) (y1:ys)
                           | ((x < x1) && (y < x) && (y == y1)) = [y] ++ merge (x:x1:xs) (y1:ys)
                           | ((x < x1) && (y > x) && (y == y1)) = [x] ++ merge (x1:xs) (y1:ys)
                           | ((x < x1) && (y == x) && (y == y1)) = [x] ++ merge (x1:xs) (ys)
-                          | ((x == x1) && (y < x) && (y /= y1)) = [y] ++ merge (x1:xs) (y1:ys)
-                          | ((x == x1) && (y > x) && (y /= y1)) = [x] ++ merge (xs) (y:y1:ys)
-                          | ((x == x1) && (y == x) && (y /= y1)) = [x] ++ merge (xs) (y1:ys)
+                          | ((x == x1) && (y < x) && (y < y1)) = [y] ++ merge (x1:xs) (y1:ys)
+                          | ((x == x1) && (y > x) && (y < y1)) = [x] ++ merge (xs) (y:y1:ys)
+                          | ((x == x1) && (y == x) && (y < y1)) = [x] ++ merge (xs) (y1:ys)
                           | ((x == x1) && (y < x) && (y == y1)) = [y] ++ merge (x1:xs) (ys)
                           | ((x == x1) && (y > x) && (y == y1)) = [x] ++ merge (xs) (y1:ys)
                           | ((x == x1) && (y == x) && (y == y1)) = [x] ++ merge (xs) (ys)
