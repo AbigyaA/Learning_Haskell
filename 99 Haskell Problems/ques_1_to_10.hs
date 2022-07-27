@@ -53,3 +53,7 @@ pack [] = []
 pack (x:xs) = (x : takeWhile (==x) xs) : pack (dropWhile (==x) xs)
 
 -- Problem 10
+encode :: (Eq a) => [a] -> [(Int, a)]
+encode ls  =  encode' (pack ls)
+          where encode' (x:xs) =  (length x, head x) : encode' xs
+                encode' [] = []
