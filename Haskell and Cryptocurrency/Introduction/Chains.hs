@@ -303,7 +303,11 @@ propHasBlock2 = not (hasBlock 8 chain5)
 -- i.e., different from each other.
 
 uniqueBlocks :: Eq txs => Chain txs -> Bool
-uniqueBlocks = error "TODO: implement uniqueBlocks"
+-- uniqueBlocks = error "TODO: implement uniqueBlocks"
+uniqueBlocks GenesisBlock = True
+uniqueBlocks (Block c txs)
+                    | not (hasBlock txs c) && uniqueBlocks c = True
+                    | otherwise  = False
 
 propUniqueBlocks1 :: Bool
 propUniqueBlocks1 = uniqueBlocks (GenesisBlock :: Chain Int)
@@ -323,7 +327,9 @@ propUniqueBlocks4 = not (uniqueBlocks (Block chain2 2))
 -- a particular property.
 
 allBlockProp :: (txs -> Bool) -> Chain txs -> Bool
-allBlockProp = error "TODO: implement allBlockProp"
+-- allBlockProp = error "TODO: implement allBlockProp"
+allBlockProp prop GenesisBlock = True
+allBlockProp prop (Block c1 txs) = (prop txs) && (allBlockProp prop c1)
 
 propAllBlockProp1 :: Bool
 propAllBlockProp1 = allBlockProp (== 'x') GenesisBlock
@@ -340,7 +346,9 @@ propAllBlockProp3 = not (allBlockProp even chain3)
 -- If the given list is empty, return 0.
 
 maxChains :: [Chain txs] -> Int
-maxChains = error "TODO: implement maxChains"
+-- maxChains = error "TODO: implement maxChains"
+maxChains [] = 0
+maxChains (c:cs) = max (lengthChain c) (maxChains cs) 
 
 propMaxChains1 :: Bool
 propMaxChains1 = maxChains [] == 0
