@@ -255,6 +255,9 @@ propAreCompatible7 = and [ propAreCompatible1
 
 commonPrefix :: Eq txs => Chain txs -> Chain txs -> Chain txs
 -- commonPrefix = error "TODO: implement commonPrefix"
+commonPrefix _ GenesisBlock = GenesisBlock
+commonPrefix GenesisBlock _ = GenesisBlock
+commonPrefix a@(Block c1 n1) b = if a `isPrefixOf` b then a else commonPrefix c1 b
 
 propCommonPrefix1 :: Bool
 propCommonPrefix1 = commonPrefix chain1 chain2 == chain1
