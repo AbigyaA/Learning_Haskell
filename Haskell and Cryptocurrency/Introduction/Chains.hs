@@ -176,7 +176,12 @@ propValidChain2 =
 -- to task 9.
 
 isPrefixOf :: Eq txs => Chain txs -> Chain txs -> Bool
-isPrefixOf = error "TODO: implement isPrefixOf"
+-- isPrefixOf = error "TODO: implement isPrefixOf"
+isPrefixOf GenesisBlock _ = True
+isPrefixOf _ GenesisBlock = False 
+isPrefixOf c1 c2@(Block c txs) 
+              | c1 == c2 = True
+              | otherwise = isPrefixOf c1 c 
 
 propIsPrefixOf1 :: Bool
 propIsPrefixOf1 = isPrefixOf chain1 chain2
@@ -209,7 +214,9 @@ propIsPrefixOf6 = and [ propIsPrefixOf1
 -- other.
 
 areCompatible :: Eq txs => Chain txs -> Chain txs -> Bool
-areCompatible = error "TODO: implement areCompatible"
+-- areCompatible = error "TODO: implement areCompatible"
+areCompatible c1 c2 = isPrefixOf c1 c2 || isPrefixOf c2 c1 
+                
 
 propAreCompatible1 :: Bool
 propAreCompatible1 = areCompatible chain1 chain2
@@ -247,7 +254,7 @@ propAreCompatible7 = and [ propAreCompatible1
 -- Given two chains, find the longest common prefix.
 
 commonPrefix :: Eq txs => Chain txs -> Chain txs -> Chain txs
-commonPrefix = error "TODO: implement commonPrefix"
+-- commonPrefix = error "TODO: implement commonPrefix"
 
 propCommonPrefix1 :: Bool
 propCommonPrefix1 = commonPrefix chain1 chain2 == chain1
