@@ -16,3 +16,8 @@ doubleEveryOther _ = []
 -- Exercise 3
 sumDigits :: [Integer] -> Integer
 sumDigits lst = sum $ map (sum . toDigits) lst
+
+-- Exercise 4
+validate :: Integer -> Bool 
+validate n | n > 0 = (sumDigits (doubleEveryOther (toDigits n))) `mod` 10 == 0
+           | otherwise = False 
