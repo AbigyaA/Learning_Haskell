@@ -373,7 +373,9 @@ propMaxChains2 = maxChains [chain1, chain2, chain3] == 3
 -- element plus a normal list.
 
 longestCommonPrefix :: Eq txs => Chain txs -> [Chain txs] -> Chain txs
-longestCommonPrefix = error "TODO: implement longestCommonPrefix"
+-- longestCommonPrefix = error "TODO: implement longestCommonPrefix"
+longestCommonPrefix x [] = x
+longestCommonPrefix x (d:ds) = commonPrefix  x (longestCommonPrefix d ds)
 
 propLongestCommonPrefix1 :: Bool
 propLongestCommonPrefix1 = longestCommonPrefix chain4 [] == chain4
