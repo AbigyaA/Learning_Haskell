@@ -21,3 +21,8 @@ sumDigits lst = sum $ map (sum . toDigits) lst
 validate :: Integer -> Bool 
 validate n | n > 0 = (sumDigits (doubleEveryOther (toDigits n))) `mod` 10 == 0
            | otherwise = False 
+
+-- Exercise 5
+type Peg = String
+type Move = (Peg, Peg)
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
