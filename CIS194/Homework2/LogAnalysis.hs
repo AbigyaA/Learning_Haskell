@@ -27,3 +27,11 @@ build = foldr insert Leaf
 inOrder :: MessageTree -> [LogMessage]
 inOrder Leaf = []
 inOrder msgTree@(Node msgT1 lgMsg msgT2) = [lgMsg] ++ (inOrder msgT1) ++ (inOrder msgT2)
+
+-- Exercise 5
+whatWentWrong :: [LogMessage] -> [String]
+whatWentWrong (x@(LogMessage msgType _ strMsg):xs) 
+                    | msgType == Error num = checkNum msgType 
+                    | otherwise = whatWentWrong xs 
+                    where checkNum msgType@(Error num) | num >= 50 = [strMsg] ++ whatWentWrong xs 
+                                                       | otherwise = whatWentWrong xs 
